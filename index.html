@@ -724,7 +724,7 @@ body {
   var answers = {};
   var userName = '';
   var userAge = '';
-  var lastShareTime = 0; // ✅ NEW
+  var lastShareTime = 0;
 
   function goToPage(pageName) {
     document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
@@ -759,7 +759,7 @@ body {
 
     var title, emoji, message;
     if (percentage === 100) {
-      title = "天才 🔥 [Genius]"; emoji = "🔥"; message = "Perfect score!";
+      title = "Genius 🔥"; emoji = "🔥"; message = "Perfect score!";
     } else if (percentage >= 80) {
       title = "Above Average 😏"; emoji = "😏"; message = "Excellent!";
     } else if (percentage >= 60) {
