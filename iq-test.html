@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>IQ Challenge – Are You Smart Enough? 🔥</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #13131f;
+    --surface2: #1c1c2e;
+    --accent: #7c3aed;
+    --accent2: #a855f7;
+    --gold: #f59e0b;
+    --green: #10b981;
+    --red: #ef4444;
+    --text: #f0f0ff;
+    --muted: #8888aa;
+    --border: rgba(255,255,255,0.08);
+    --glow: rgba(124, 58, 237, 0.35);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Space Grotesk', 'Noto Sans Tamil', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 50% at 20% 0%, rgba(124,58,237,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(168,85,247,0.12) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: var(--accent2);
+    opacity: 0;
+    animation: float-up linear infinite;
+  }
+
+  @keyframes float-up {
+    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-10vh) translateX(20px); opacity: 0; }
+  }
+
+  /* Screens */
+  .screen {
+    display: none;
+    min-height: 100vh;
+    padding: 24px 20px 40px;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 0.4s ease;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .screen.active { display: flex; flex-direction: column; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(40px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* ── Landing ── */
+  .landing-hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+    padding: 20px 0;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(239,68,68,0.15);
+    border: 1px solid rgba(239,68,68,0.3);
+    color: #fca5a5;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    animation: pulse-badge 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-badge {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); }
+    50% { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+  }
+
+  .hero-emoji {
+    font-size: 72px;
+    line-height: 1;
+    animation: bounce 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 24px rgba(168,85,247,0.5));
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.05); }
+  }
+
+  .hero-title {
+    font-size: clamp(26px, 7vw, 36px);
+    font-weight: 800;
+    line-height: 1.15;
+    background: linear-gradient(135deg, #fff 30%, var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 300px;
+  }
+
+  .tamil-hook {
+    background: linear-gradient(135deg, var(--surface), var(--surface2));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tamil-hook::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(124,58,237,0.05), transparent);
+  }
+
+  .tamil-hook span { color: var(--text); font-weight: 600; }
+
+  .stats-row {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .stat-card {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 10px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-size: 22px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--gold), #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ── Buttons ── */
+  .btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+    border: none;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.2px;
+  }
+
+  .btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0);
+    transition: background 0.2s;
+  }
+
+  .btn:active::after { background: rgba(255,255,255,0.1); }
+  .btn:active { transform: scale(0.98); }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    box-shadow: 0 8px 32px var(--glow), 0 2px 8px rgba(0,0,0,0.4);
+  }
+
+  .btn-primary:hover { box-shadow: 0 12px 40px var(--glow), 0 2px 8px rgba(0,0,0,0.4); }
+
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid rgba(168,85,247,0.4);
+    color: var(--accent2);
+  }
+
+  .btn-outline:hover { background: rgba(168,85,247,0.08); }
+
+  .btn-gold {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: #1a0a00;
+    box-shadow: 0 8px 24px rgba(245,158,11,0.35);
+  }
+
+  .btn-green {
+    background: linear-gradient(135deg, #059669, #10b981);
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(16,185,129,0.35);
+  }
+
+  .btn-share {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 15px;
+  }
+
+  /* ── Form ── */
+  .form-title {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  .form-sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+
+  .form-group { margin-bottom: 20px; }
+
+  .form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .form-input {
+    width: 100%;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .form-input:focus {
+    border-color: var(--accent2);
+    box-shadow: 0 0 0 3px rgba(168,85,247,0.15);
+  }
+
+  .form-input::placeholder { color: var(--muted); }
+
+  /* Age pills */
+  .age-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .age-pill {
+    padding: 8px 16px;
+    border-radius: 100px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .age-pill.selected {
+    border-color: var(--accent2);
+    background: rgba(168,85,247,0.12);
+    color: var(--accent2);
+  }
+
+  /* ── Questions ── */
+  .q-header {
+    margin-bottom: 24px;
+  }
+
+  .q-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .q-num {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .q-timer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(239,68,68,0.12);
+    border: 1px solid rgba(239,68,68,0.2);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fca5a5;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 4px;
+    background: var(--surface2);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width 0.5s ease;
+  }
+
+  .q-text {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+
+  .q-tamil {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .option-btn {
+    width: 100%;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    text-align: left;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .option-letter {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+
+  .option-btn:hover {
+    border-color: rgba(168,85,247,0.4);
+    background: rgba(168,85,247,0.06);
+  }
+
+  .option-btn:hover .option-letter {
+    background: rgba(168,85,247,0.2);
+    color: var(--accent2);
+  }
+
+  .option-btn.correct {
+    border-color: var(--green);
+    background: rgba(16,185,129,0.1);
+    animation: correct-flash 0.3s ease;
+  }
+
+  .option-btn.correct .option-letter {
+    background: var(--green);
+    color: #fff;
+  }
+
+  .option-btn.wrong {
+    border-color: var(--red);
+    background: rgba(239,68,68,0.1);
+  }
+
+  .option-btn.wrong .option-letter {
+    background: var(--red);
+    color: #fff;
+  }
+
+  .option-btn:disabled { cursor: default; }
+
+  @keyframes correct-flash {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+  }
+
+  /* ── Share screen ── */
+  .share-screen {
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+    padding-top: 60px;
+  }
+
+  .lock-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, var(--surface), var(--surface2));
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 8px rgba(124,58,237,0.08);
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 0 rgba(124,58,237,0.2); }
+    50% { box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 16px rgba(124,58,237,0); }
+  }
+
+  .share-title {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.3;
+  }
+
+  .share-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 300px;
+  }
+
+  .share-count {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent2);
+  }
+
+  .dots-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .share-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: transparent;
+    transition: all 0.3s;
+  }
+
+  .share-dot.filled {
+    background: var(--green);
+    border-color: var(--green);
+    box-shadow: 0 0 8px rgba(16,185,129,0.5);
+  }
+
+  .share-buttons { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+
+  /* ── Loading ── */
+  .loading-screen {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 28px;
+  }
+
+  .brain-anim {
+    font-size: 72px;
+    animation: brain-spin 1s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 24px rgba(168,85,247,0.6));
+  }
+
+  @keyframes brain-spin {
+    from { transform: scale(0.9) rotate(-5deg); }
+    to   { transform: scale(1.1) rotate(5deg); }
+  }
+
+  .loading-title {
+    font-size: 22px;
+    font-weight: 800;
+  }
+
+  .loading-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .loading-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--muted);
+    opacity: 0;
+    animation: step-in 0.5s ease forwards;
+  }
+
+  .loading-step.done { color: var(--green); }
+  .loading-step .step-icon { font-size: 18px; }
+
+  @keyframes step-in {
+    from { opacity: 0; transform: translateX(-10px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .loader-bar {
+    width: 100%;
+    max-width: 300px;
+    height: 6px;
+    background: var(--surface2);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  .loader-fill {
+    height: 100%;
+    border-radius: 100px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--gold));
+    background-size: 200% 100%;
+    animation: loading-bar 3s ease forwards, shimmer 1s linear infinite;
+    width: 0%;
+  }
+
+  @keyframes loading-bar {
+    0% { width: 0%; }
+    30% { width: 40%; }
+    60% { width: 70%; }
+    85% { width: 90%; }
+    100% { width: 100%; }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* ── Result ── */
+  .result-screen {
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    padding-top: 40px;
+  }
+
+  .result-emoji {
+    font-size: 80px;
+    animation: result-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    filter: drop-shadow(0 0 30px rgba(168,85,247,0.5));
+  }
+
+  @keyframes result-pop {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .result-name {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .result-title {
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--gold), #fbbf24, var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+  }
+
+  .iq-score-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 20px 32px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .iq-score-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--gold));
+  }
+
+  .iq-num {
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, #fff, var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: count-up 1.5s ease forwards;
+  }
+
+  .iq-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  .result-desc {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.65;
+    max-width: 320px;
+  }
+
+  .share-result-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .share-result-row .btn {
+    flex: 1;
+    font-size: 14px;
+    padding: 14px 10px;
+  }
+
+  .result-actions { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+
+  /* ── Second Test ── */
+  .second-test-card {
+    background: linear-gradient(135deg, var(--surface), var(--surface2));
+    border: 1px solid rgba(168,85,247,0.2);
+    border-radius: 20px;
+    padding: 20px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .second-test-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(124,58,237,0.08), transparent);
+  }
+
+  .second-test-card:hover {
+    border-color: rgba(168,85,247,0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(124,58,237,0.15);
+  }
+
+  .test-card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 6px;
+  }
+
+  .test-card-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .test-card-sub { font-size: 13px; color: var(--muted); }
+  .test-card-arrow { font-size: 24px; float: right; margin-top: -30px; }
+
+  /* ── Personality Test ── */
+  .p-question {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+
+  .p-tamil { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+  .personality-result {
+    background: linear-gradient(135deg, var(--surface), var(--surface2));
+    border: 1px solid rgba(245,158,11,0.3);
+    border-radius: 20px;
+    padding: 24px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .personality-result::before {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 60px;
+    background: linear-gradient(90deg, var(--gold), #fbbf24);
+    border-radius: 100px;
+    margin: 0 auto 16px;
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* Section labels */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 8px;
+  }
+
+  /* Spacing helpers */
+  .mt-auto { margin-top: auto; }
+  .mt-8 { margin-top: 8px; }
+  .mt-16 { margin-top: 16px; }
+  .gap-8 { display: flex; flex-direction: column; gap: 8px; }
+
+  /* Confetti canvas */
+  #confetti-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<div class="particles" id="particles"></div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ══════════════════════════════════════ LANDING -->
+<div class="screen active" id="screen-landing">
+  <div class="landing-hero">
+    <div class="badge">🔴 LIVE NOW &nbsp;·&nbsp; 2,847 people testing</div>
+    <div class="hero-emoji">🧠</div>
+    <h1 class="hero-title">Only 2% can pass<br>this test 😳</h1>
+    <p class="hero-sub">உன்னோட IQ என்ன? — உண்மை உன்னை shock ஆக்கும்!</p>
+
+    <div class="tamil-hook">
+      <span>5 Questions · 30 seconds each</span><br>
+      India-ல இதுவரை யாரும் perfect score எடுக்கல!<br>
+      <span>நீ எடுக்க முடியுமா? 🤔</span>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">1.2M+</div>
+        <div class="stat-label">Tests Taken</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2%</div>
+        <div class="stat-label">Genius Rate</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">4.9⭐</div>
+        <div class="stat-label">Rating</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" onclick="goTo('screen-details')" style="margin-bottom:12px">
+    🚀 Start IQ Test — Free!
+  </button>
+  <p style="text-align:center;font-size:12px;color:var(--muted)">
+    Takes only 3 minutes · 100% Free
+  </p>
+</div>
+
+<!-- ══════════════════════════════════════ USER DETAILS -->
+<div class="screen" id="screen-details">
+  <div style="margin-bottom:32px">
+    <div class="section-label">Step 1 of 3</div>
+    <div class="form-title">உன்னைப் பத்தி சொல் 👋</div>
+    <div class="form-sub">Tell us about you — your results will be personalised!</div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Your Name / உன் பேர்</label>
+    <input class="form-input" id="input-name" type="text" placeholder="Enter your name..." maxlength="30">
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Age Group / வயது</label>
+    <div class="age-pills">
+      <button class="age-pill" onclick="selectAge(this, 'Under 18')">Under 18</button>
+      <button class="age-pill" onclick="selectAge(this, '18–24')">18–24</button>
+      <button class="age-pill" onclick="selectAge(this, '25–35')">25–35</button>
+      <button class="age-pill" onclick="selectAge(this, '35–45')">35–45</button>
+      <button class="age-pill" onclick="selectAge(this, '45+')">45+</button>
+    </div>
+  </div>
+
+  <div class="mt-auto gap-8" style="margin-top:auto">
+    <button class="btn btn-primary" onclick="startTest()">
+      Continue → &nbsp; Test Start பண்ணு!
+    </button>
+    <button class="btn btn-outline" onclick="goTo('screen-landing')">← Back</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ QUESTION -->
+<div class="screen" id="screen-question">
+  <div class="q-header">
+    <div class="q-meta">
+      <div class="q-num" id="q-num-label">Question 1 of 5</div>
+      <div class="q-timer">⏱ <span id="q-timer">30</span>s</div>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="q-progress" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="q-text" id="q-text"></div>
+  <div class="q-tamil" id="q-tamil"></div>
+
+  <div class="options-grid" id="q-options"></div>
+
+  <div style="margin-top:auto;padding-top:24px;color:var(--muted);font-size:12px;text-align:center">
+    ⚡ Think fast! உன்னோட first instinct சரியாக இருக்கும்
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ SHARE TO UNLOCK -->
+<div class="screen share-screen" id="screen-share">
+  <div class="lock-icon">🔒</div>
+  <div class="share-title">Result Ready! 🎉<br>But it's locked...</div>
+  <div class="share-desc">
+    உன் result பார்க்க — 3 friends-கிட்ட share பண்ணு! 
+    <br>Challenge them to beat your score!
+  </div>
+
+  <div class="share-count">
+    <span>Shared:</span>
+    <div class="dots-row">
+      <div class="share-dot" id="dot-1"></div>
+      <div class="share-dot" id="dot-2"></div>
+      <div class="share-dot" id="dot-3"></div>
+    </div>
+    <span id="share-count-text">0 / 3</span>
+  </div>
+
+  <div class="share-buttons" id="share-buttons">
+    <button class="btn btn-share" onclick="shareToApp('WhatsApp', '🟢', this)">
+      🟢 Share on WhatsApp
+    </button>
+    <button class="btn btn-share" onclick="shareToApp('Instagram', '📸', this)">
+      📸 Share on Instagram
+    </button>
+    <button class="btn btn-share" onclick="shareToApp('Telegram', '✈️', this)">
+      ✈️ Share on Telegram
+    </button>
+  </div>
+
+  <p style="font-size:12px;color:var(--muted)">
+    Already shared? Tap any button to continue
+  </p>
+</div>
+
+<!-- ══════════════════════════════════════ LOADING -->
+<div class="screen loading-screen" id="screen-loading">
+  <div class="brain-anim">🧠</div>
+  <div class="loading-title">Calculating your IQ...</div>
+
+  <div class="loading-steps" id="loading-steps">
+    <div class="loading-step" style="animation-delay:0.2s">
+      <span class="step-icon">🔬</span> Analysing your answers...
+    </div>
+    <div class="loading-step" style="animation-delay:0.8s">
+      <span class="step-icon">📊</span> Comparing with 1.2M users...
+    </div>
+    <div class="loading-step" style="animation-delay:1.4s">
+      <span class="step-icon">🧬</span> Calculating cognitive score...
+    </div>
+    <div class="loading-step" style="animation-delay:2s">
+      <span class="step-icon">✅</span> Result ready!
+    </div>
+  </div>
+
+  <div class="loader-bar">
+    <div class="loader-fill" id="loader-fill"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ RESULT -->
+<div class="screen result-screen" id="screen-result">
+  <div class="result-emoji" id="result-emoji">🔥</div>
+  <div class="result-name" id="result-greeting">Result for You</div>
+  <div class="result-title" id="result-title">Genius!</div>
+
+  <div class="iq-score-card">
+    <div class="iq-num" id="iq-num">142</div>
+    <div class="iq-label">Your IQ Score · உன்னோட IQ</div>
+  </div>
+
+  <div class="result-desc" id="result-desc"></div>
+
+  <div class="share-result-row">
+    <button class="btn btn-share" onclick="shareResult('WhatsApp')">🟢 WhatsApp</button>
+    <button class="btn btn-share" onclick="shareResult('Instagram')">📸 Story</button>
+    <button class="btn btn-share" onclick="shareResult('Twitter')">🐦 Twitter</button>
+  </div>
+
+  <div class="result-actions">
+    <button class="btn btn-primary" onclick="tryAgain()">🔄 Try Again</button>
+    <button class="btn btn-outline" onclick="compareFriends()">👥 Compare with Friends</button>
+  </div>
+
+  <div class="divider">Try Next</div>
+
+  <div class="second-test-card" onclick="startPersonalityTest()">
+    <div class="test-card-label">✨ New Test</div>
+    <div class="test-card-title">Personality Test 🌟</div>
+    <div class="test-card-sub">உன்னோட secret personality என்ன?<br>Find out in 60 seconds!</div>
+    <div class="test-card-arrow">→</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ PERSONALITY TEST -->
+<div class="screen" id="screen-personality">
+  <div style="margin-bottom:24px">
+    <div class="section-label">🌟 Personality Test</div>
+    <h2 style="font-size:22px;font-weight:800">What's your hidden personality? 😏</h2>
+    <p style="font-size:13px;color:var(--muted);margin-top:6px">உன்னோட true self-ஐ discover பண்ணு!</p>
+  </div>
+
+  <div style="margin-bottom:16px">
+    <div class="progress-bar">
+      <div class="progress-fill" id="p-progress" style="width:0%"></div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-top:6px;text-align:right" id="p-num-label">Q 1 of 5</div>
+  </div>
+
+  <div class="p-question" id="p-question"></div>
+  <div class="p-tamil" id="p-tamil"></div>
+  <div class="options-grid" id="p-options"></div>
+</div>
+
+<!-- ══════════════════════════════════════ PERSONALITY RESULT -->
+<div class="screen result-screen" id="screen-personality-result">
+  <div class="result-emoji" id="p-result-emoji">🌊</div>
+  <div class="result-name">Your Personality Type</div>
+  <div class="result-title" id="p-result-title">The Visionary</div>
+
+  <div class="personality-result">
+    <div style="font-size:40px;margin-bottom:12px" id="p-big-emoji">🌊</div>
+    <div style="font-size:16px;font-weight:700;margin-bottom:8px" id="p-type-name">The Visionary</div>
+    <div style="font-size:14px;color:var(--muted);line-height:1.6" id="p-type-desc"></div>
+  </div>
+
+  <div class="share-result-row">
+    <button class="btn btn-share" onclick="shareResult('WhatsApp')">🟢 Share</button>
+    <button class="btn btn-share" onclick="shareResult('Instagram')">📸 Story</button>
+  </div>
+
+  <div class="result-actions">
+    <button class="btn btn-gold" onclick="goTo('screen-landing')">🧠 Take IQ Test Again</button>
+    <button class="btn btn-outline" onclick="tryAgain()">🔄 Retry Personality Test</button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════
+// STATE
+// ══════════════════════════════════════
+let userName = '';
+let userAge = '';
+let currentQ = 0;
+let score = 0;
+let timerInterval = null;
+let timeLeft = 30;
+let shareCount = 0;
+let answers = [];
+let currentPQ = 0;
+let pAnswers = [];
+
+// ══════════════════════════════════════
+// IQ QUESTIONS
+// ══════════════════════════════════════
+const questions = [
+  {
+    text: "If you rearrange the letters 'CIFAIPC', you get the name of a ___?",
+    tamil: "இந்த letters-ஐ arrange பண்ணால் என்ன கிடைக்கும்?",
+    options: ["Country", "Ocean", "City", "Animal"],
+    correct: 1
+  },
+  {
+    text: "Which number completes the series? 2, 6, 12, 20, 30, ___",
+    tamil: "இந்த series-ல அடுத்த number என்ன?",
+    options: ["38", "40", "42", "44"],
+    correct: 2
+  },
+  {
+    text: "A clock shows 3:15. What is the angle between the hour and minute hands?",
+    tamil: "3:15 மணிக்கு hour மற்றும் minute hands இடையே angle என்ன?",
+    options: ["0°", "7.5°", "15°", "22.5°"],
+    correct: 1
+  },
+  {
+    text: "If MOUSE = 74, CAT = 36, then DOG = ?",
+    tamil: "இந்த pattern-ல DOG-ன் value என்ன?",
+    options: ["30", "26", "32", "28"],
+    correct: 2
+  },
+  {
+    text: "What comes next in the pattern? △ □ △△ □□ △△△ ___",
+    tamil: "இந்த pattern-ல next என்ன?",
+    options: ["△△△△", "□□□", "△□", "□□□□"],
+    correct: 1
+  }
+];
+
+// ══════════════════════════════════════
+// PERSONALITY QUESTIONS
+// ══════════════════════════════════════
+const personalityQ = [
+  {
+    text: "Weekend-ல என்ன பண்ண விரும்புவே?",
+    tamil: "What do you prefer on weekends?",
+    options: ["Chill at home 🏠", "Explore new places 🌍", "Meet friends 👥", "Try something new 🎯"]
+  },
+  {
+    text: "Friend problem solve பண்ண கேட்கும்போது நீ...?",
+    tamil: "When a friend asks for advice, you...",
+    options: ["Listen carefully first 👂", "Give direct solution 💡", "Ask more questions ❓", "Share your experience 💬"]
+  },
+  {
+    text: "உனக்கு ideal life என்ன?",
+    tamil: "What's your ideal life?",
+    options: ["Stable & predictable 🏡", "Adventurous & free 🦅", "Creative & expressive 🎨", "Helping others 💛"]
+  },
+  {
+    text: "Tough decision எடுக்கும்போது நீ...?",
+    tamil: "When making a tough decision, you rely on...",
+    options: ["Logic & facts 🔬", "Gut feeling 🌊", "Others' opinions 👥", "Long-term impact 🔭"]
+  },
+  {
+    text: "உன்னோட biggest strength என்ன?",
+    tamil: "What is your biggest strength?",
+    options: ["Creativity 🎨", "Leadership 👑", "Empathy 💛", "Analytical thinking 🧮"]
+  }
+];
+
+const personalityTypes = {
+  0: { emoji: "🔥", name: "The Leader", desc: "நீ ஒரு natural born leader! You take charge, inspire others, and make bold decisions. People look up to you. உன்னோட confidence உன்னை special-ஆக்குது. Born to lead — you rarely follow!" },
+  1: { emoji: "🌊", name: "The Visionary", desc: "You see the world differently! Creative, imaginative, and always thinking ahead. உன்னோட ideas always surprise everyone. A dreamer who makes dreams real — that's you!" },
+  2: { emoji: "💛", name: "The Empath", desc: "உன்னோட heart-ஐ யாலும் match பண்ண முடியாது! You feel deeply, connect easily, and make everyone feel seen. The world needs more people like you!" },
+  3: { emoji: "🧠", name: "The Analyst", desc: "Logic is your superpower! உன்னால் patterns-ஐ யாரும் பார்க்காத இடத்தல பார்க்க முடியும். You solve problems others give up on. Detail-oriented genius — that's you!" }
+};
+
+// ══════════════════════════════════════
+// SCREEN NAV
+// ══════════════════════════════════════
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ══════════════════════════════════════
+// PARTICLES
+// ══════════════════════════════════════
+(function initParticles() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
+    p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    container.appendChild(p);
+  }
+})();
+
+// ══════════════════════════════════════
+// FORM
+// ══════════════════════════════════════
+function selectAge(el, val) {
+  document.querySelectorAll('.age-pill').forEach(p => p.classList.remove('selected'));
+  el.classList.add('selected');
+  userAge = val;
+}
+
+function startTest() {
+  const nameInput = document.getElementById('input-name').value.trim();
+  if (!nameInput) { showToast('Please enter your name! 😊'); return; }
+  if (!userAge) { showToast('Age group select பண்ணு! 👆'); return; }
+  userName = nameInput;
+  currentQ = 0;
+  score = 0;
+  answers = [];
+  loadQuestion();
+  goTo('screen-question');
+}
+
+// ══════════════════════════════════════
+// QUESTIONS
+// ══════════════════════════════════════
+function loadQuestion() {
+  if (currentQ >= questions.length) { goToShare(); return; }
+  const q = questions[currentQ];
+  const letters = ['A', 'B', 'C', 'D'];
+
+  document.getElementById('q-num-label').textContent = `Question ${currentQ+1} of ${questions.length}`;
+  document.getElementById('q-text').textContent = q.text;
+  document.getElementById('q-tamil').textContent = q.tamil;
+  document.getElementById('q-progress').style.width = ((currentQ / questions.length) * 100) + '%';
+
+  const opts = document.getElementById('q-options');
+  opts.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerHTML = `<span class="option-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = () => selectAnswer(i, q.correct, btn);
+    opts.appendChild(btn);
+  });
+
+  startTimer();
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timeLeft = 30;
+  document.getElementById('q-timer').textContent = timeLeft;
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    document.getElementById('q-timer').textContent = timeLeft;
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      autoNext();
+    }
+  }, 1000);
+}
+
+function autoNext() {
+  document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+  answers.push(-1);
+  setTimeout(() => { currentQ++; loadQuestion(); }, 800);
+}
+
+function selectAnswer(idx, correct, btn) {
+  clearInterval(timerInterval);
+  document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+  const btns = document.querySelectorAll('.option-btn');
+
+  if (idx === correct) {
+    btn.classList.add('correct');
+    score++;
+    answers.push(1);
+  } else {
+    btn.classList.add('wrong');
+    btns[correct].classList.add('correct');
+    answers.push(0);
+  }
+
+  setTimeout(() => { currentQ++; loadQuestion(); }, 1000);
+}
+
+// ══════════════════════════════════════
+// SHARE FLOW
+// ══════════════════════════════════════
+function goToShare() {
+  shareCount = 0;
+  updateShareDots();
+  goTo('screen-share');
+}
+
+function shareToApp(app, icon, btn) {
+  const shareText = `🧠 IQ Test எடுத்தேன்! ${userName} score இப்போ பார்க்கணும்! உன்னால் beat பண்ண முடியுமா? 👇\n${window.location.href}`;
+  
+  if (app === 'WhatsApp') {
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
+  } else if (app === 'Instagram') {
+    navigator.clipboard?.writeText(shareText);
+    showToast('📋 Copied! Paste in Instagram Stories');
+  } else {
+    window.open(`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(shareText)}`, '_blank');
+  }
+
+  btn.style.borderColor = 'var(--green)';
+  btn.style.color = 'var(--green)';
+
+  shareCount = Math.min(shareCount + 1, 3);
+  updateShareDots();
+
+  if (shareCount >= 3) {
+    setTimeout(() => goToLoading(), 600);
+  }
+}
+
+function updateShareDots() {
+  for (let i = 1; i <= 3; i++) {
+    const dot = document.getElementById('dot-' + i);
+    if (i <= shareCount) dot.classList.add('filled');
+    else dot.classList.remove('filled');
+  }
+  document.getElementById('share-count-text').textContent = `${shareCount} / 3`;
+}
+
+// ══════════════════════════════════════
+// LOADING → RESULT
+// ══════════════════════════════════════
+function goToLoading() {
+  goTo('screen-loading');
+  // Re-trigger animations
+  const fill = document.getElementById('loader-fill');
+  fill.style.animation = 'none';
+  void fill.offsetWidth;
+  fill.style.animation = 'loading-bar 3.5s ease forwards, shimmer 1s linear infinite';
+
+  const steps = document.querySelectorAll('#loading-steps .loading-step');
+  steps.forEach((s, i) => {
+    s.style.opacity = 0;
+    s.style.animation = 'none';
+    void s.offsetWidth;
+    s.style.animation = `step-in 0.5s ease ${i * 0.6 + 0.2}s forwards`;
+  });
+
+  setTimeout(() => showResult(), 4000);
+}
+
+function showResult() {
+  // Determine IQ outcome
+  let outcome;
+  if (score === 5) {
+    outcome = { emoji: '🔥', title: 'Genius!', iq: Math.floor(Math.random()*15)+138, desc: `Wow ${userName}! 5/5 correct! நீ top 2% brain-ல ஒருத்தன்! Your IQ places you among the rarest minds. Einstein would be jealous! 🤯` };
+  } else if (score >= 3) {
+    outcome = { emoji: '😏', title: 'Above Average!', iq: Math.floor(Math.random()*15)+118, desc: `Not bad at all, ${userName}! ${score}/5 correct. உன்னோட brain sharp-ஆ இருக்கு! You're smarter than 78% of people who took this test! 💪` };
+  } else if (score >= 1) {
+    outcome = { emoji: '😳', title: 'Hidden Talent!', iq: Math.floor(Math.random()*15)+98, desc: `${userName}, don't be discouraged! ${score}/5 — உன்னிடம் hidden talents இருக்கு! Your creativity and emotional intelligence are off the charts! 🌟` };
+  } else {
+    outcome = { emoji: '😅', title: 'Keep Practising!', iq: Math.floor(Math.random()*15)+88, desc: `Hey ${userName}, everyone starts somewhere! Practice makes perfect. இன்னொரு முறை try பண்ணு — நீ definitely improve ஆவுவே! 💪` };
+  }
+
+  document.getElementById('result-emoji').textContent = outcome.emoji;
+  document.getElementById('result-title').textContent = outcome.title;
+  document.getElementById('result-greeting').textContent = `Result for ${userName} · Age ${userAge}`;
+  document.getElementById('iq-num').textContent = outcome.iq;
+  document.getElementById('result-desc').textContent = outcome.desc;
+
+  goTo('screen-result');
+  if (score >= 3) launchConfetti();
+}
+
+// ══════════════════════════════════════
+// PERSONALITY TEST
+// ══════════════════════════════════════
+function startPersonalityTest() {
+  currentPQ = 0;
+  pAnswers = [];
+  loadPQ();
+  goTo('screen-personality');
+}
+
+function loadPQ() {
+  if (currentPQ >= personalityQ.length) { showPersonalityResult(); return; }
+  const q = personalityQ[currentPQ];
+  const letters = ['A','B','C','D'];
+
+  document.getElementById('p-question').textContent = q.text;
+  document.getElementById('p-tamil').textContent = q.tamil;
+  document.getElementById('p-num-label').textContent = `Q ${currentPQ+1} of ${personalityQ.length}`;
+  document.getElementById('p-progress').style.width = ((currentPQ / personalityQ.length) * 100) + '%';
+
+  const opts = document.getElementById('p-options');
+  opts.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerHTML = `<span class="option-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = () => { pAnswers.push(i); currentPQ++; loadPQ(); };
+    opts.appendChild(btn);
+  });
+}
+
+function showPersonalityResult() {
+  // Tally most frequent answer
+  const freq = [0,0,0,0];
+  pAnswers.forEach(a => freq[a]++);
+  const dominant = freq.indexOf(Math.max(...freq));
+  const type = personalityTypes[dominant];
+
+  document.getElementById('p-result-emoji').textContent = type.emoji;
+  document.getElementById('p-result-title').textContent = type.name;
+  document.getElementById('p-big-emoji').textContent = type.emoji;
+  document.getElementById('p-type-name').textContent = type.name;
+  document.getElementById('p-type-desc').textContent = type.desc;
+
+  goTo('screen-personality-result');
+  launchConfetti();
+}
+
+// ══════════════════════════════════════
+// SHARE RESULT
+// ══════════════════════════════════════
+function shareResult(platform) {
+  const iqNum = document.getElementById('iq-num').textContent;
+  const title = document.getElementById('result-title').textContent;
+  const text = `🧠 My IQ is ${iqNum} — "${title}" \n${userName} IQ test-ல இதை achieve பண்னேன்! Can you beat me? 👇\n${window.location.href}`;
+  
+  if (platform === 'WhatsApp') window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+  else if (platform === 'Twitter') window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
+  else { navigator.clipboard?.writeText(text); showToast('📋 Copied! Paste anywhere 🎉'); }
+}
+
+function compareFriends() {
+  const text = `🧠 ${userName}-ஓட IQ score-ஐ beat பண்ண முடியுமா? 😏 Try here: ${window.location.href}`;
+  window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+}
+
+function tryAgain() {
+  currentQ = 0; score = 0; answers = []; shareCount = 0;
+  goTo('screen-details');
+}
+
+// ══════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════
+let toastTimeout;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ══════════════════════════════════════
+// CONFETTI
+// ══════════════════════════════════════
+function launchConfetti() {
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const pieces = Array.from({length: 80}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * -canvas.height,
+    w: Math.random() * 10 + 5,
+    h: Math.random() * 14 + 8,
+    color: ['#7c3aed','#a855f7','#f59e0b','#10b981','#ef4444','#fbbf24'][Math.floor(Math.random()*6)],
+    rot: Math.random() * 360,
+    vx: (Math.random() - 0.5) * 3,
+    vy: Math.random() * 4 + 2,
+    vr: (Math.random() - 0.5) * 6
+  }));
+
+  let frames = 0;
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pieces.forEach(p => {
+      ctx.save();
+      ctx.translate(p.x + p.w/2, p.y + p.h/2);
+      ctx.rotate(p.rot * Math.PI / 180);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      ctx.restore();
+      p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+    });
+    if (frames++ < 150) requestAnimationFrame(draw);
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  draw();
+}
+</script>
+</body>
+</html>
